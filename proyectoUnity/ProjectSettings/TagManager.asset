@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - UpBound
+  - DownBound
+  - LeftBound
+  - RightBound
   layers:
   - Default
   - TransparentFX
@@ -18,7 +22,7 @@ TagManager:
   - Enemies
   - PlayerBullets
   - EnemyBullets
-  - 
+  - Background
   - 
   - 
   - 

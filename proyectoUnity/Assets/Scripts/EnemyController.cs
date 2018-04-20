@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour {
     public float bulletVelocity = 1;
     public float bulletPeriod = 0.25f;
     public float bulletProbability = 0.25f;
+    public int scoreValue = 100;
 
 
     protected float nextShootTime = 0.0f;
@@ -19,11 +20,14 @@ public class EnemyController : MonoBehaviour {
     protected bool onPlay = false;
     protected GameObject player;
     protected bool alreadyShoot = false;
+    protected int _scoreValue = 100;
+
 
     // Use this for initialization
     void Start () {
         _velocity = velocity;
         _health = health;
+        _scoreValue = scoreValue;
         if (guidedBullets)
         {
             player = GameObject.FindWithTag("Player");
@@ -79,7 +83,7 @@ public class EnemyController : MonoBehaviour {
                 float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 
                 GameObject bullet = GameObject.Instantiate(bulletPrefab, new Vector3(this.transform.position.x, this.transform.position.y - 0.15f, this.transform.position.z), Quaternion.Euler(0f, 0f, rot_z - 90));
-                bullet.GetComponent<Rigidbody2D>().velocity = diff * bulletVelocity;
+                bullet.GetComponent<Rigidbody2D>().velocity = diff.normalized * bulletVelocity;
                 _velocity = velocity * 2;
                 alreadyShoot = true;
             }
@@ -94,6 +98,7 @@ public class EnemyController : MonoBehaviour {
         _health--;
         if (_health <= 0)
         {
+            player.GetComponent<PlayerController>().addScore(_scoreValue);
             //Play animation death
             Destroy(gameObject);
         }
