@@ -43,7 +43,7 @@ Me he basado en el juego 1942 para hacer un juego de naves con un enfoque un poc
     \item \textbf{Update():} Se mueve hasta la posición indicada y entonces dispara, también se encarga de restablecer el color si ha recibido daño.
     \item \textbf{Shoot():} Esto son los disparos normales que hace en dos líneas en un intervalo indicado.
     \item \textbf{ShootGuided():} Este es el misil que dispara a donde este el player en ese momento en un intervalo indicado.
-    \item \textbf{Damage():} Cuando le hacen daño le restó vida y le cambio su color a rojo para darle feedback al player, y cuando muere ejecutó la animación de muerte.
+    \item \textbf{Damage():} Cuando le hacen daño le restó vida y le cambio su color a rojo para darle feedback al player, y cuando muere ejecutó la animación de muerte y  añado su scoreValue al score del player.
     \item \textbf{WaitForDeathAnimation():} Esto lo hice porque no era capaz de hacer que se destruyera el boss una vez se ejecutara la animación de muerte, así que lo que hice fue que esperara un tiempo y luego ya destruyera.
     \item \textbf{GetHealth():} Devuelvo la vida del boss.
     \item \textbf{OnTriggerEnter2D():} Si el player decide chocarse con el boss le hago daño al player.
@@ -51,23 +51,70 @@ Me he basado en el juego 1942 para hacer un juego de naves con un enfoque un poc
 
   \item \textbf{BulletController:} Controlador de las balas, tanto del player como de los enemigos y el boss.
   \begin{itemize}
-    \item \textbf{OnTriggerEnter2D():} .
-    \item \textbf{OnTriggerExit2D():} .
+    \item \textbf{OnTriggerEnter2D():} Aquí es donde llamo al Damage() según con quien haya chocado, esto funciona en todos los casos porque la matriz de Physic2D están activadas sólo las colisiones necesarias.
+    \item \textbf{OnTriggerExit2D():} Para que las balas no existan fuera de la pantalla cuando pasan de los bounds se eliminan.
   \end{itemize}
 
-  \item \textbf{EnemyController:} Bleh.
-  \item \textbf{FadeText:} Bleh.
-  \item \textbf{HUDManager:} Bleh.
-  \item \textbf{Layers:} Bleh.
-  \item \textbf{LoadScene:} Bleh.
-  \item \textbf{LoadUnloadBackgroundController:} Bleh.
-  \item \textbf{PauseMenu:} Bleh.
-  \item \textbf{PlayerController:} Bleh.
-  \item \textbf{Singleton:} Bleh.
-  \item \textbf{WaveController:} Bleh.
+  \item \textbf{EnemyController:} Controlador de los enemigos.
+	\begin{itemize}
+    \item \textbf{Start():} Inicializo todo lo que voy a necesitar.
+    \item \textbf{Update():} Movimiento y el tipo de disparo que realiza el enemigo.
+    \item \textbf{Shoot():} Disparo normal que realizan los enemigos principales, son balas que viajan hacia abajo en la pantalla y que tienen un temporizador mas una probabilidad de ser disparadas.
+    \item \textbf{ShootGuided():} Disparo de misil que va hacia la posición del player en ese instante, lo realizan los enemigos secundarios, al igual que las balas tienen un temporizador y una probabilidad de ser disparados.
+    \item \textbf{Damage():} Le resto vida cuando sufre daño y cuando su vida llega a cero lo elimino y añado su scoreValue al score del player.
+    \item \textbf{OnTriggerEnter2D():} Si se chocan con el player se eliminan y realizan daño al player.
+    \item \textbf{OnTriggerExit2D():} Aquí controlo que no disparen hasta que estén dentro del área de juego y que cuando salgan de esta se eliminen.
+  \end{itemize}
+
+  \item \textbf{FadeText:} Función para hacer desaparecer y aparecer el texto.
+	\begin{itemize}
+    \item \textbf{Start():} Simplemente inicio HideUnhide().
+    \item \textbf{HideUnhide():} Activo o desactivo el texto según el timer que tenga para darle un efecto de "fade".
+  \end{itemize}
+
+  \item \textbf{HUDManager:} Singleton del hud del juego en el que muestro la vida, el score y el highscore.
+	\begin{itemize}
+    \item \textbf{Awake():} Cargo la variable highscore si existe de esta manera aunque se cierre unity el highscore se carga al volver a iniciar.
+    \item \textbf{Update():} Actualizo el texto de score y highscore, y si score supera el highscore lo sustituyo.
+  \end{itemize}
+
+  \item \textbf{Layers:} Lista de las layers que tengo para acceder de manera más sencilla desde el código.
+
+  \item \textbf{LoadScene:} Pequeño script para cargar una escena, que le indico, cuando se presiona cualquier tecla.
+	\begin{itemize}
+    \item \textbf{Update():} Si presiona cualquier tecla cargo la escena que me hayan pasado y reinicio el timescale por si esta a 0.
+  \end{itemize}
+
+  \item \textbf{LoadUnloadBackgroundController:} Este controlador es el que tienen los fondos para avisar al BackgroundController que tiene que hacer si cargar o descargar.
+	\begin{itemize}
+    \item \textbf{OnTriggerEnter2D():} Los fondos tiene dos triggers, cuando paso por primera vez por la parte de abajo de los bounds de la escena activo el bool para hacer saber al BackgroundController que tiene que descargar el anterior background, y cuando pasan por la parte de arriba de los bounds de la escena si es el primer trigger no hago nada, pero cuando es el segundo se que tengo que cargar el siguiente fondo así que cambio el bool para que el BackgroundController lo sepa.
+  \end{itemize}
+
+  \item \textbf{PauseMenu:} Menú de pausa que sale al presionar escape durante la partida.
+	\begin{itemize}
+    \item \textbf{Update():} Si se presiona escape entro en el menu y permito que presionen resume o menu.
+    \item \textbf{Resume():} Salgo del menu de pausa, esto es mediante click del botón que hace referencia a esta función o presionando otra vez escape.
+		\item \textbf{Pause():} Pongo el timescale a cero y muestro el menú de pausa.
+    \item \textbf{LoadMenu():} Si presiono el botón menu del menú de pausa me voy a la escena de menu.
+  \end{itemize}
+
+  \item \textbf{PlayerController:} Controlador del player.
+	\begin{itemize}
+    \item \textbf{Start():} Inicializo todo lo que voy a necesitar.
+    \item \textbf{Update():} Si está vivo se puede mover dentro de los bounds de la escena, seteo la animación hacia izquierda, derecha o idle, y le permito disparar si presiona espacio.
+    \item \textbf{Damage():} Si tiene vida le resto cuando sufre daño y actualizo la UI, si no le queda vida llamo a la animación de muerte.
+    \item \textbf{WaitForDeathAnimation():} Al igual que en el boss no estaba seguro de como hacer para esperar a que se eliminará después de ejecutar la animación así que lo he hecho con un tiempo que seteo yo aqui tambien.
+    \item \textbf{OnDestroy():} Si se destruye el player guardo en las variables de unity el highscore para cargarlo en la próxima partida.
+  \end{itemize}
+
+  \item \textbf{Singleton:} Singleton que utilizo con el HUDManager.
+
+  \item \textbf{WaveController:} Controlador de oleadas, cuando pasan la cantidad de waves indicadas hay una wave especial que es el jefe.
+	\begin{itemize}
+    \item \textbf{Start():} Inicializo todo lo que voy a necesitar.
+    \item \textbf{Update():} Controlo el spawn de las oleadas en la cantidad indicada esperando el tiempo entre ellas indicado también, una vez no quedan más oleadas normales instancio una de jefe y una vez muere el jefe vuelvo a cargar waves normales y así continuamente.
+  \end{itemize}
 
 \end{itemize}
-
-
 
 \end{document}
