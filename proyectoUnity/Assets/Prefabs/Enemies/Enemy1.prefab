@@ -105,8 +105,8 @@ MonoBehaviour:
     type: 2}
   guidedBullets: 0
   bulletVelocity: 2
-  bulletPeriod: 0.5
-  bulletProbability: 0.01
+  bulletPeriod: 0.25
+  bulletProbability: 0.25
   scoreValue: 100
 --- !u!212 &212548280871918784
 SpriteRenderer:
@@ -141,7 +141,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300208, guid: 44d5d7d8bc22a410daabfc84c557e871, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

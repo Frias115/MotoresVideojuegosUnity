@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour {
     public float bulletPeriod = 0.25f;
     public float bulletProbability = 0.25f;
     public int scoreValue = 100;
+    public AudioClip shootSound;
 
 
     protected float nextShootTime = 0.0f;
@@ -21,6 +22,7 @@ public class EnemyController : MonoBehaviour {
     protected GameObject player;
     protected bool alreadyShoot = false;
     protected int _scoreValue = 100;
+    private AudioSource audioSource;
 
 
     // Use this for initialization
@@ -31,11 +33,12 @@ public class EnemyController : MonoBehaviour {
         if (guidedBullets)
         {
             player = GameObject.FindWithTag("Player");
+            audioSource = GetComponent<AudioSource>();
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         //Movement 
         GetComponent<Rigidbody2D>().velocity = new Vector2(-transform.up.x, -transform.up.y) * _velocity;
 
@@ -86,6 +89,8 @@ public class EnemyController : MonoBehaviour {
                 bullet.GetComponent<Rigidbody2D>().velocity = diff.normalized * bulletVelocity;
                 _velocity = velocity * 2;
                 alreadyShoot = true;
+                audioSource.clip = shootSound;
+                audioSource.Play();
             }
             nextShootTime = 0;
         }
@@ -98,7 +103,7 @@ public class EnemyController : MonoBehaviour {
         _health--;
         if (_health <= 0)
         {
-            player.GetComponent<PlayerController>().addScore(_scoreValue);
+            HUDManager.score += _scoreValue;
             //Play animation death
             Destroy(gameObject);
         }

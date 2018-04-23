@@ -18,7 +18,14 @@ public class BulletController : MonoBehaviour {
     {
         if (other.gameObject.layer == Layers.Enemies)
         {
-            other.GetComponent<EnemyController>().Damage();
+            if(other.GetComponent<EnemyController>() != null)
+            {
+                other.GetComponent<EnemyController>().Damage();
+            }
+            else
+            {
+                other.GetComponent<BossController>().Damage();
+            }
             Destroy(gameObject);
         } else if(other.gameObject.layer == Layers.Player)
         {

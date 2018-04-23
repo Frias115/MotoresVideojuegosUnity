@@ -34,7 +34,6 @@ public class BackgroundController : MonoBehaviour {
 
         int rand = Random.Range(0, listBackgrounds.Length);
 
-        Debug.Log(listBackgrounds[rand].GetComponent<SpriteRenderer>().bounds.size.y);
         middleBackground = GameObject.Instantiate(waterBackground, new Vector2(previousBackground.transform.position.x, waterBackgroundSize), Quaternion.Euler(Vector2.zero));
         currentBackground = GameObject.Instantiate(listBackgrounds[rand], new Vector2(middleBackground.transform.position.x, listBackgrounds[rand].GetComponent<SpriteRenderer>().bounds.size.y), Quaternion.Euler(Vector2.zero));
 
