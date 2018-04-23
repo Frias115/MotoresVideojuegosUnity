@@ -18,22 +18,22 @@ public class BossController : MonoBehaviour
     public AudioClip shootSound;
 
 
-    protected float nextShootTime = 0.0f;
-    protected float nextMissileTime = 0.0f;
-    protected float _velocity;
-    protected int _health;
-    protected bool onPlay = false;
-    protected GameObject player;
+    private float nextShootTime = 0.0f;
+    private float nextMissileTime = 0.0f;
+    private float _velocity;
+    private int _health;
     private float upBound;
-    protected int _scoreValue = 100;
+    private int _scoreValue = 100;
+    private bool damaged;
+    private bool alive = true;
+    private float nextDamageTime = 0.0f;
+    private float damagedPeriod = 0.2f;
+    private GameObject player;
     private AudioSource audioSource;
     private SpriteRenderer sr;
+    private Animator animator;
     private Transform bulletSpawn, bulletSpawn1, missileSpawn;
-    private bool damaged;
-    protected float nextDamageTime = 0.0f;
-    protected float damagedPeriod = 0.2f;
 
-    // Use this for initialization
     void Start()
     {
         _velocity = velocity;
@@ -43,6 +43,7 @@ public class BossController : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         audioSource = GetComponent<AudioSource>();
         sr = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
 
         bulletSpawn = transform.Find("BulletSpawn");
         Debug.Log(bulletSpawn);
@@ -53,38 +54,41 @@ public class BossController : MonoBehaviour
         upBound = GameObject.FindGameObjectsWithTag("UpBound")[0].transform.position.y;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (transform.position.y >= upBound - offset)
+        if(alive)
         {
-            //Movement 
-            GetComponent<Rigidbody2D>().velocity = new Vector2(-transform.up.x, -transform.up.y) * _velocity;
-        }
-        else
+            if (transform.position.y >= upBound - offset)
+            {
+                //Movement 
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-transform.up.x, -transform.up.y) * _velocity;
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+                //Shoot
+                ShootGuided();
+                Shoot();
+            }
+
+            if (damaged)
+            {
+                if (nextDamageTime > damagedPeriod)
+                {
+                    damaged = false;
+                    nextDamageTime = 0;
+                }
+                nextDamageTime += Time.deltaTime;
+            }
+            else
+            {
+                sr.color = Color.white;
+            }
+        } else
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-
-            //Shoot
-            ShootGuided();
-            Shoot();
         }
-
-        if (damaged)
-        {
-            if (nextDamageTime > damagedPeriod)
-            {
-                damaged = false;
-                nextDamageTime = 0;
-            }
-            nextDamageTime += Time.deltaTime;
-        }
-        else
-        {
-            sr.color = Color.white;
-        }
-
-
     }
 
     protected void Shoot()
@@ -122,15 +126,30 @@ public class BossController : MonoBehaviour
 
     public void Damage()
     {
-        _health--;
-        damaged = true;
-        sr.color = Color.red;
-        if (_health <= 0)
+        if(alive)
         {
-            HUDManager.score += _scoreValue;
-            //Play animation death
-            Destroy(gameObject);
+            if (_health <= 0)
+            {
+                alive = false;
+                HUDManager.score += _scoreValue;
+                animator.SetTrigger("Dead");
+                StartCoroutine(WaitForDeathAnimation());
+            } else
+            {
+                _health--;
+                damaged = true;
+                sr.color = Color.red;
+            }
         }
+ 
+    }
+
+    private IEnumerator WaitForDeathAnimation()
+    {
+
+        yield return new WaitForSeconds(0.75f);
+        Destroy(gameObject);
+
     }
 
     public int GetHealth()
@@ -143,20 +162,6 @@ public class BossController : MonoBehaviour
         if (other.gameObject.layer == Layers.Player)
         {
             other.GetComponent<PlayerController>().Damage();
-            Destroy(gameObject);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.layer == Layers.Bounds)
-        {
-            if (onPlay)
-            {
-                Destroy(gameObject);
-            }
-
-            onPlay = true;
         }
     }
 }

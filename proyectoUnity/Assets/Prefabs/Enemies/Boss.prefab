@@ -70,6 +70,7 @@ GameObject:
   - component: {fileID: 212613461809194766}
   - component: {fileID: 114565412768997696}
   - component: {fileID: 82685164672975296}
+  - component: {fileID: 95706414800708970}
   m_Layer: 10
   m_Name: Boss
   m_TagString: Untagged
@@ -84,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1912817050176550}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.04, y: 9.05, z: 0}
+  m_LocalPosition: {x: -0.04, y: 9, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 2}
   m_Children:
   - {fileID: 4525561054432988}
@@ -282,6 +283,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!95 &95706414800708970
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1912817050176550}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9f34be1e344d9442d9e90b1e0d6bf67a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114565412768997696
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -12,19 +12,17 @@ public class WaveController : MonoBehaviour {
 
 
     private float nextWaveTime = 0.0f;
-    private float timeForBoss = 10f;
+    private float timeForBoss = 12f;
     private int _numberOfWaves;
     private EnemyController[] currentWaveToSpawn;
     private GameObject boss;
     private bool bossTime = true;
     private int bossHealth;
-
-    // Use this for initialization
+    
     void Start() {
         _numberOfWaves = numberOfWaves;
     }
 
-    // Update is called once per frame
     void Update () {
         if (_numberOfWaves > 0)
         {
@@ -60,7 +58,7 @@ public class WaveController : MonoBehaviour {
                 bossHealth = boss.GetComponent<BossController>().GetHealth();
             }
 
-            if (!bossTime && bossHealth <= 1 && nextWaveTime > 1f)
+            if (!bossTime && bossHealth <= 0 && nextWaveTime > 1f)
             {
                 bossTime = true;
                 _numberOfWaves = numberOfWaves;

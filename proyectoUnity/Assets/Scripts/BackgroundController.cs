@@ -15,7 +15,6 @@ public class BackgroundController : MonoBehaviour {
     private GameObject middleBackground;
     private GameObject previousBackground;
 
-	// Use this for initialization
 	void Start () {
         SpriteRenderer[] sprites = startBackground.GetComponentsInChildren<SpriteRenderer>();
 
@@ -40,7 +39,6 @@ public class BackgroundController : MonoBehaviour {
 
     }
 
-    // Update is called once per frame
     void FixedUpdate () {
 
         if(previousBackground != null && middleBackground != null)

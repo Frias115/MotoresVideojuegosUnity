@@ -11,7 +11,6 @@ public class FadeText : MonoBehaviour
         StartCoroutine("HideUnhide");
     }
 
-
     IEnumerator HideUnhide()
     {
         while (true)

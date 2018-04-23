@@ -15,17 +15,16 @@ public class EnemyController : MonoBehaviour {
     public AudioClip shootSound;
 
 
-    protected float nextShootTime = 0.0f;
-    protected float _velocity;
-    protected int _health;
-    protected bool onPlay = false;
-    protected GameObject player;
-    protected bool alreadyShoot = false;
-    protected int _scoreValue = 100;
+    private float nextShootTime = 0.0f;
+    private float _velocity;
+    private int _health;
+    private bool onPlay = false;
+    private GameObject player;
+    private bool alreadyShoot = false;
+    private int _scoreValue = 100;
     private AudioSource audioSource;
 
 
-    // Use this for initialization
     void Start () {
         _velocity = velocity;
         _health = health;
@@ -37,7 +36,6 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    // Update is called once per frame
     void Update () {
         //Movement 
         GetComponent<Rigidbody2D>().velocity = new Vector2(-transform.up.x, -transform.up.y) * _velocity;
@@ -104,7 +102,6 @@ public class EnemyController : MonoBehaviour {
         if (_health <= 0)
         {
             HUDManager.score += _scoreValue;
-            //Play animation death
             Destroy(gameObject);
         }
     }

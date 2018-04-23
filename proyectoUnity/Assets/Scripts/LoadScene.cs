@@ -5,14 +5,7 @@ using UnityEngine;
 
 public class LoadScene : MonoBehaviour
 {
-
     public string SceneName = "Menu";
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()

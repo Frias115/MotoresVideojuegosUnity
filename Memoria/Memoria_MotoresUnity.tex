@@ -1,0 +1,73 @@
+% !TEX root = /home/frias/Documents/4ºCurso/Motores/MotoresVideojuegosUnityRepo/Memoria/Memoria_MotoresUnity.tex
+
+\documentclass[titlepage, 4apaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{csquotes}
+\usepackage{graphicx}
+\usepackage{comment}
+
+\title{Memoria motores Unity}
+\author{Frías Bernal, Roberto\\
+\texttt{roberto.frias@live.u-tad.com}}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\clearpage
+
+\section{Descripción}
+
+Me he basado en el juego 1942 para hacer un juego de naves con un enfoque un poco más "bullet hell". El juego consiste en conseguir la máxima puntuación posible con 6 vidas, para ello hay que destruir las naves enemigas que van apareciendo y el boss que aparece cuando han pasado un número concreto de waves.\\Si se consigue un nuevo récord de score este se guarda para que el jugador pueda saber cual es, incluso entre partidas distintas. Y para mantener interesante el juego las waves son aleatorias y los fondos que van saliendo también.
+
+\section{Controles}
+
+\begin{itemize}
+	\item \textbf{Teclas direccionales y W/A/S/D:} Controlan el movimiento del player.
+  \item \textbf{Espacio:} Disparo del player.
+  \item \textbf{Escape:} Menú de pausa, se controla con el ratón.
+\end{itemize}
+
+\section{Funciones}
+
+\begin{itemize}
+	\item \textbf{BackgroundController:} Se encarga de carga y descargar los fondos que van pasando por la pantalla. Los que carga los elige de manera aleatoria de una lista de posibles fondos. Utilizó un fragmento de agua entre fondo y fondo para hacer la union mas sencilla.
+  \begin{itemize}
+    \item \textbf{Start():} Creó un fondo de barco que siempre es el mismo y el primer fondo aleatorio con su fragmeto de agua que los une.
+    \item \textbf{Update():} Aquí es donde voy descargando los fragmentos pasados y cargo los nuevos de manera aleatoria.
+    \end{itemize}
+
+  \item \textbf{BossController:} Este es el controlador del jefe.
+  \begin{itemize}
+    \item \textbf{Start():} Inicializo todo lo que voy a necesitar.
+    \item \textbf{Update():} Se mueve hasta la posición indicada y entonces dispara, también se encarga de restablecer el color si ha recibido daño.
+    \item \textbf{Shoot():} Esto son los disparos normales que hace en dos líneas en un intervalo indicado.
+    \item \textbf{ShootGuided():} Este es el misil que dispara a donde este el player en ese momento en un intervalo indicado.
+    \item \textbf{Damage():} Cuando le hacen daño le restó vida y le cambio su color a rojo para darle feedback al player, y cuando muere ejecutó la animación de muerte.
+    \item \textbf{WaitForDeathAnimation():} Esto lo hice porque no era capaz de hacer que se destruyera el boss una vez se ejecutara la animación de muerte, así que lo que hice fue que esperara un tiempo y luego ya destruyera.
+    \item \textbf{GetHealth():} Devuelvo la vida del boss.
+    \item \textbf{OnTriggerEnter2D():} Si el player decide chocarse con el boss le hago daño al player.
+  \end{itemize}
+
+  \item \textbf{BulletController:} Controlador de las balas, tanto del player como de los enemigos y el boss.
+  \begin{itemize}
+    \item \textbf{OnTriggerEnter2D():} .
+    \item \textbf{OnTriggerExit2D():} .
+  \end{itemize}
+
+  \item \textbf{EnemyController:} Bleh.
+  \item \textbf{FadeText:} Bleh.
+  \item \textbf{HUDManager:} Bleh.
+  \item \textbf{Layers:} Bleh.
+  \item \textbf{LoadScene:} Bleh.
+  \item \textbf{LoadUnloadBackgroundController:} Bleh.
+  \item \textbf{PauseMenu:} Bleh.
+  \item \textbf{PlayerController:} Bleh.
+  \item \textbf{Singleton:} Bleh.
+  \item \textbf{WaveController:} Bleh.
+
+\end{itemize}
+
+
+
+\end{document}

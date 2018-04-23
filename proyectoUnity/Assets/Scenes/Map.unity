@@ -329,28 +329,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: Map
---- !u!1 &518524188 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1688317946552094, guid: e149d459015224dd9a264f2dd027f15e,
-    type: 2}
-  m_PrefabInternal: {fileID: 1984081085}
---- !u!95 &518524195
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 518524188}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6fd8e9c5749959d47b938ad2cb9aff2a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &853450594
 Prefab:
   m_ObjectHideFlags: 0
@@ -456,7 +434,8 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114301784309788950, guid: 59b4910fdc546864381e6fdded8ba800, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 59b4910fdc546864381e6fdded8ba800, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1001403537
@@ -555,6 +534,61 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224267957133755616, guid: 7399492119f85304c9bd73ef13c459d9,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224267957133755616, guid: 7399492119f85304c9bd73ef13c459d9,
+        type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224267957133755616, guid: 7399492119f85304c9bd73ef13c459d9,
+        type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114173248333120016, guid: 7399492119f85304c9bd73ef13c459d9,
+        type: 2}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224381239894406538, guid: 7399492119f85304c9bd73ef13c459d9,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -190
+      objectReference: {fileID: 0}
+    - target: {fileID: 224633801684623948, guid: 7399492119f85304c9bd73ef13c459d9,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -190
+      objectReference: {fileID: 0}
+    - target: {fileID: 224260916562680822, guid: 7399492119f85304c9bd73ef13c459d9,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -190
+      objectReference: {fileID: 0}
+    - target: {fileID: 224050610057804928, guid: 7399492119f85304c9bd73ef13c459d9,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -190
+      objectReference: {fileID: 0}
+    - target: {fileID: 224496000277113200, guid: 7399492119f85304c9bd73ef13c459d9,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -190
+      objectReference: {fileID: 0}
+    - target: {fileID: 224671479570404196, guid: 7399492119f85304c9bd73ef13c459d9,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -190
+      objectReference: {fileID: 0}
+    - target: {fileID: 114173248333120016, guid: 7399492119f85304c9bd73ef13c459d9,
+        type: 2}
+      propertyPath: m_ScreenMatchMode
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7399492119f85304c9bd73ef13c459d9, type: 2}
@@ -802,7 +836,7 @@ Prefab:
     - target: {fileID: 114606434844752298, guid: e149d459015224dd9a264f2dd027f15e,
         type: 2}
       propertyPath: health
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e149d459015224dd9a264f2dd027f15e, type: 2}
